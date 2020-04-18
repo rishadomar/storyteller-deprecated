@@ -14,7 +14,8 @@ const mutations = {
 
 const actions = {
 	async fetchStory(context, params) {
-		let db = firebase.firestore();
+		let storage = firebase.storage()
+		let db = firebase.firestore()
 		var documentReference = db.collection("stories").doc(params.storyId);
 		if (state.stories.find(story => story.id === params.storyId)) {
 			return new Promise((success) => { success([]) })
@@ -31,17 +32,22 @@ const actions = {
 					.get();
 				let pages = [];
 				querySnapshot.forEach(function (doc) {
-					let data = doc.data();
-					pages.push({
-						id: doc.id,
-						content: data.content,
-						number: parseInt(data.number),
-						audio: data.audio,
-						image: data.image
-					});
-
-
-				});
+					let data = doc.data()
+					var gsReference = storage.refFromURL(data.audio)
+					gsReference.getDownloadURL()
+						.then(function (url) {
+							pages.push({
+								id: doc.id,
+								content: data.content,
+								number: parseInt(data.number),
+								audio: data.audio,
+								image: url
+							})
+						})
+						.catch(function (error) {
+							console.log('Error encountered finding image: ' + data.audio + ' Error:' + error.code)
+						})
+				})
 				story.pages = pages;
 				context.commit('ADD_STORY', story);
 			})
