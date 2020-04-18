@@ -3,7 +3,7 @@
         <v-card v-if="story" max-width="450" class="mx-auto">
             <v-toolbar color="indigo" dark>
                 <v-toolbar-title>
-                    {{ story.name }} (Page: {{ currentPageNumber }})
+                    {{ story.titles['en']}} (Page: {{ currentPageNumber }})
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
             </v-toolbar>
@@ -11,7 +11,7 @@
             <v-img
                 :src="currentPage.image"
                 aspect-ratio="1.7"
-                height="600"
+                height="500"
             ></v-img>
 
             <v-card-text class="content">

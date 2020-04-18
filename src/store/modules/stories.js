@@ -22,8 +22,8 @@ const actions = {
 		let story = {};
 		return documentReference.get()
 			.then(document => {
-				story = document.data();
-				story.id = document.id;
+				story = document.data()
+				story.id = document.id
 			})
 			.then(async () => {
 				const querySnapshot = await db.collection("stories").doc(params.storyId).collection("pages")
