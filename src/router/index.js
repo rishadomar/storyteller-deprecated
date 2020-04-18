@@ -10,7 +10,7 @@ Vue.use(VueRouter)
   },
   {
       path: '/stories',
-      name: 'SpinningActivities',
+      name: 'Stories',
       component: () => import('@/views/Stories.vue')
   },
   {

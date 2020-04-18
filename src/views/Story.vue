@@ -52,7 +52,7 @@ export default {
     },
 
     created() {
-        this.fetchStory({ storyId: this.$props.storyId });
+        this.fetchStory({ storyId: this.storyId });
     },
 
     data() {
