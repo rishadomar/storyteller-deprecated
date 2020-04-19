@@ -14,12 +14,12 @@ const mutations = {
 
 const actions = {
 	async fetchStory(context, params) {
-		let storage = firebase.storage()
-		let db = firebase.firestore()
-		var documentReference = db.collection("stories").doc(params.storyId);
 		if (state.stories.find(story => story.id === params.storyId)) {
 			return new Promise((success) => { success([]) })
 		}
+		let storage = firebase.storage()
+		let db = firebase.firestore()
+		var documentReference = db.collection("stories").doc(params.storyId);
 		let story = {};
 		return documentReference.get()
 			.then(document => {
@@ -28,7 +28,6 @@ const actions = {
 			})
 			.then(async () => {
 				const querySnapshot = await db.collection("stories").doc(params.storyId).collection("pages")
-					.orderBy('number', 'asc')
 					.get();
 				let pages = [];
 				querySnapshot.forEach(function (doc) {
@@ -48,7 +47,7 @@ const actions = {
 							console.log('Error encountered finding image: ' + data.audio + ' Error:' + error.code)
 						})
 				})
-				story.pages = pages;
+				story.pages = pages
 				context.commit('ADD_STORY', story);
 			})
 			.catch(function (error) {

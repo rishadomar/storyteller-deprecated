@@ -1,9 +1,9 @@
 <template>
     <div id="story-component">
-        <v-card v-if="story" max-width="450" class="mx-auto">
+        <v-card v-if="currentPage" max-width="450" class="mx-auto">
             <v-toolbar color="indigo" dark>
                 <v-toolbar-title>
-                    {{ story.titles['en']}} (Page: {{ currentPageNumber }})
+                    {{ story.titles['en']}} (Page: {{ currentPageNumber }} / {{ currentPage.number }})
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
             </v-toolbar>
@@ -82,9 +82,9 @@ export default {
 
         currentPage: function() {
             if (this.story && this.story.pages && this.story.pages.length > 0) {
-                return this.story.pages[this.currentPageNumber - 1]
+                return this.story.pages.find(page => page.number == this.currentPageNumber)
             } else {
-                return {}
+                return null
             }
         },
 
