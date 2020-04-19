@@ -5,7 +5,6 @@
                 <v-toolbar-title>
                     {{ story.titles['en']}} (Page: {{ currentPageNumber }} / {{ currentPage.number }})
                 </v-toolbar-title>
-                <v-spacer></v-spacer>
             </v-toolbar>
 
             <v-img

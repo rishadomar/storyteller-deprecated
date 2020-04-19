@@ -14,7 +14,7 @@
                 >
                     <v-list-item-content>
                         <v-list-item-title
-                            v-text="story.name"
+                            v-text="story.titles['en']"
                         ></v-list-item-title>
                         <v-list-item-subtitle>
                             {{ story.createdAt | formatDateTime }}
@@ -49,7 +49,7 @@ export default {
     },
 
     created() {
-        this.fetchStories({userEmail: this.userEmail});
+        this.fetchTitles()
     },
 
     data() {
@@ -59,9 +59,7 @@ export default {
 
     methods: {
         ...mapActions({
-            fetchStories:
-                "stories/fetchStories",
-            addStory: "stories/addStory",
+            fetchTitles: "stories/fetchTitles"
         }),
 
         selectStory: function(id) {
@@ -73,8 +71,7 @@ export default {
 
     computed: {
         ...mapGetters({
-            stories: "stories/getStories",
-            story: "stories/getStory",
+            stories: "stories/getTitles",
         })
     }
 };

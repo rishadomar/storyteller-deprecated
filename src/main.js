@@ -8,6 +8,17 @@ import * as firebase from "firebase";
 Vue.config.productionTip = false
 import firebaseConfig from '@/firebaseConfig';
 
+//
+// Filters
+//
+Vue.filter('formatDateTime', function (timestamp) {
+    if (!timestamp) {
+        return ''
+    }
+    var date = timestamp.toDate()
+    return date.toDateString() + ' ' + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())
+})
+
 new Vue({
     router,
     store,
