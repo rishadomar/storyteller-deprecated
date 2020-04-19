@@ -44,7 +44,7 @@ const actions = {
 							})
 						})
 						.catch(function (error) {
-							console.log('Error encountered finding image: ' + data.audio + ' Error:' + error.code)
+							alert('Error encountered finding image: ' + data.audio + ' Error:' + error.code)
 						})
 				})
 				story.pages = pages
